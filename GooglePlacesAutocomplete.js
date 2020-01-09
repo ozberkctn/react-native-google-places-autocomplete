@@ -412,8 +412,6 @@ export default class GooglePlacesAutocomplete extends Component {
       ...this.props.GooglePlacesSearchQuery
     });
 
-    debugger;
-
     if (
       latitude !== undefined &&
       longitude !== undefined &&
@@ -537,7 +535,6 @@ export default class GooglePlacesAutocomplete extends Component {
         }
       };
       const queryString = Qs.stringify(this.props.query);
-      debugger;
       request.open(
         'GET',
         'https://maps.googleapis.com/maps/api/place/autocomplete/json?&input=' +
@@ -769,7 +766,6 @@ export default class GooglePlacesAutocomplete extends Component {
       Math.random()
         .toString(36)
         .substr(2, 10);
-    debugger;
     if (
       (this.state.text !== '' ||
         this.props.predefinedPlaces.length ||
