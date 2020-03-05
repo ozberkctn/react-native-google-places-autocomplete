@@ -533,6 +533,7 @@ export default class GooglePlacesAutocomplete extends Component {
         } else {
           // console.warn("google places autocomplete: request could not be completed or has been aborted");
         }
+        this.setState({loading:false});
       };
       const queryString = Qs.stringify(this.props.query);
       
@@ -559,6 +560,9 @@ export default class GooglePlacesAutocomplete extends Component {
   };
 
   _onChangeText = text => {
+    if (text.length >= this.props.minLength) {
+      this.setState({loading:true});
+    }
     this._request(text);
 
     this.setState({
@@ -832,7 +836,7 @@ export default class GooglePlacesAutocomplete extends Component {
               this.props.styles.textInputContainer
             ]}
           >
-            {this._renderLeftButton()}
+            {this.state.loading ? this._getRowLoader(): this._renderLeftButton()}
             <TextInput
               ref="textInput"
               editable={this.props.editable}
