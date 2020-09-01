@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 import Qs from 'qs';
 import debounce from 'lodash.debounce';
+import { setTestID } from "../../src/helper/utils";
 
 const WINDOW = Dimensions.get('window');
 
@@ -645,6 +646,7 @@ export default class GooglePlacesAutocomplete extends Component {
   _renderRow = (rowData = {}, sectionID, rowID) => {
     return (
       <TouchableHighlight
+        {...setTestID(`places_list_item_${sectionID}`)}
         style={{
           width: WINDOW.width,
           height: 72,
@@ -792,7 +794,7 @@ export default class GooglePlacesAutocomplete extends Component {
             keyExtractor={keyGenerator}
             extraData={[this.state.dataSource, this.props]}
             ItemSeparatorComponent={this._renderSeparator}
-            renderItem={({ item }) => this._renderRow(item)}
+            renderItem={({ item,index }) => this._renderRow(item,index)}
             contentContainerStyle={{ flex: 1 }}
             ListFooterComponent={this._renderPoweredLogo}
             {...this.props}
@@ -838,6 +840,7 @@ export default class GooglePlacesAutocomplete extends Component {
           >
             {this.state.loading ? this._getRowLoader(): this._renderLeftButton()}
             <TextInput
+            {...setTestID("google_places_auto_complete")}
               ref="textInput"
               editable={this.props.editable}
               returnKeyType={this.props.returnKeyType}
