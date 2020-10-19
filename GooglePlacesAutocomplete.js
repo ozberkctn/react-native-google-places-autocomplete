@@ -839,6 +839,7 @@ export default class GooglePlacesAutocomplete extends Component {
             ]}
           >
             {this.state.loading ? this._getRowLoader(): this._renderLeftButton()}
+            <View style={{height:50,flex:1,justifyContent:"center",borderRadius: 5}}>
             <TextInput
             {...setTestID("google_places_auto_complete")}
               ref="textInput"
@@ -849,7 +850,7 @@ export default class GooglePlacesAutocomplete extends Component {
                 this.props.suppressDefaultStyles
                   ? {}
                   : defaultStyles.textInput,
-                this.props.styles.textInput
+                  this.props.styles.textInput,{maxHeight:31}                
               ]}
               value={this.state.text}
               placeholder={this.props.placeholder}
@@ -868,6 +869,7 @@ export default class GooglePlacesAutocomplete extends Component {
               {...userProps}
               onChangeText={this._handleChangeText}
             />
+            </View>
             {this._renderRightButton()}
           </View>
         )}
